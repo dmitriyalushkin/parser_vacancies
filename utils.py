@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 import requests
-
+import json
 import os
 
 SECRET_KEY = os.getenv('X-Api-App-Id')
@@ -24,6 +24,10 @@ class Vacancy:
     def __repr__(self):
         return f'{self.name}'
 
+    def __ge__(self, other):
+        return self.top_n >= other.top_n
+
+
 
 class HeadHunterAPI(Vacancy, ApiClient):
     """Получает вакансию от API HeadHunter"""
@@ -33,7 +37,7 @@ class HeadHunterAPI(Vacancy, ApiClient):
             self.url = 'https://api.hh.ru'
 
     def get_vacancies(self):
-            data = requests.get(f'{self.url}/vacancies', params={'text': 'python', 'page': 1, 'per_page': 10}).json()
+            data = requests.get(f'{self.url}/vacancies', params={'text': self.name, 'page': self.page, 'per_page': self.top_n}).json()
             return data
 
     def add_vacancy_hh(self):
@@ -81,6 +85,25 @@ class SuperJobAPI(Vacancy, ApiClient):
 
 
 
+class VacanciesJSON(ABC):
+    @abstractmethod
+    def add_vacancy_headhunter(self):
+        pass
+
+    @abstractmethod
+    def add_vacancy_superjob(self):
+        pass
+
+class JSONSaver(VacanciesJSON):
+    def add_vacancy_headhunter(self, data):
+        with open('hh.json', 'a', encoding='utf-8') as file:
+            data_hh = json.dump(data, file, indent=2, ensure_ascii=False)
+        return data_hh
+
+    def add_vacancy_superjob(self, data):
+        with open('sj.json', 'a', encoding='utf-8') as file:
+            data_sj = json.dump(data, file, indent=2, ensure_ascii=False)
+        return data_sj
 
 
 
@@ -88,10 +111,16 @@ class SuperJobAPI(Vacancy, ApiClient):
 
 
 
-# hh_api = HeadHunterAPI('python', 1, 100000)
-# hh_vacancies = hh_api.get_vacancies()
+
+
+hh_api = HeadHunterAPI('python', 1, 1)
+hh_vacancies = hh_api.get_vacancies()
 # print(hh_vacancies)
-superjob_api = SuperJobAPI('python', 1, 100000)
-superjob_vacancies = superjob_api.add_vacancy_sj()
-print(superjob_vacancies)
+# superjob_api = SuperJobAPI('python', 1, 100000)
+# superjob_vacancies = superjob_api.add_vacancy_sj()
+# print(superjob_vacancies)
+jsonsaver = JSONSaver()
+print(jsonsaver.add_vacancy_headhunter(hh_vacancies))
+# print(jsonsaver.add_vacancy_superjob(superjob_vacancies))
+
 
