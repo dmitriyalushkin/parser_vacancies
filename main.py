@@ -33,7 +33,7 @@ def user_interaction():
                 print(f"\n \033Платформа: {platform}")
                 for item in data:
                     print(
-                        f"id - {item['id']}\nДолжность - {item['name']}\nЗ.п от - {item['solary_ot']}\nЗ.п до - {item['solary_do']}\nОписание - {item['responsibility']}\n")
+                        f"id - {item['id']}\nДолжность - {item['name']}\nЗ.п от - {item['salary_ot']}\nЗ.п до - {item['salary_do']}\nОписание - {item['responsibility']}\n")
 
             a = input('перейти на следующую страницу? y/n ')
             if a == 'y':
@@ -53,7 +53,7 @@ def user_interaction():
 
             for platform in combined_dict['HH']:
                 print(
-                    f"\nid - {platform['id']}\nДолжность - {platform['name']}\nЗ.п от - {platform['solary_ot']}\nЗ.п до - {platform['solary_ot']}\nОписание - {platform['responsibility']}\n")
+                    f"\nid - {platform['id']}\nДолжность - {platform['name']}\nЗ.п от - {platform['salary_ot']}\nЗ.п до - {platform['salary_do']}\nОписание - {platform['responsibility']}\n")
             a = input('перейти на следующую страницу? y/n ')
             if a == 'y':
                 page += 1
@@ -75,7 +75,7 @@ def user_interaction():
 
             for platform in combined_dict['SJ']:
                 print(
-                    f"\nid - {platform['id']}\nДолжность - {platform['name']}\nЗ.п от - {platform['solary_ot']}\nЗ.п до - {platform['solary_do']}\nОписание - {platform['responsibility']}\n")
+                    f"\nid - {platform['id']}\nДолжность - {platform['name']}\nЗ.п от - {platform['salary_ot']}\nЗ.п до - {platform['salary_do']}\nОписание - {platform['responsibility']}\n")
 
             a = input('перейти на следующую страницу? y/n ')
             if a == 'y':

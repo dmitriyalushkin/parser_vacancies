@@ -60,9 +60,9 @@ class SuperJobAPI(Vacancy, ApiClient):
 
     def get_vacancies(self):
         headers = {
-                        'X-Api-App-Id': os.getenv('SUPERJOB_API_KEY'),
+                    'X-Api-App-Id': os.getenv('X-Api-App-Id'),
                     }
-        data = requests.get(self.url, headers=headers, params={'keywords': 'python', 'page': 1, 'count': 10}).json()
+        data = requests.get(self.url, headers=headers, params={'keywords': self.name, 'page': self.page, 'count': self.top_n}).json()
         return data
 
     def add_vacancy_sj(self):
@@ -91,7 +91,7 @@ class SuperJobAPI(Vacancy, ApiClient):
 # hh_api = HeadHunterAPI('python', 1, 100000)
 # hh_vacancies = hh_api.get_vacancies()
 # print(hh_vacancies)
-# superjob_api = SuperJobAPI('python', 1, 100000)
-# superjob_vacancies = superjob_api.add_vacancy_sj()
-# print(superjob_vacancies)
+superjob_api = SuperJobAPI('python', 1, 100000)
+superjob_vacancies = superjob_api.add_vacancy_sj()
+print(superjob_vacancies)
 
