@@ -21,6 +21,7 @@ class Vacancy:
         self.page = page
         self.top_n = top_n
 
+
     def __repr__(self):
         return f'{self.name}'
 
@@ -114,13 +115,14 @@ class JSONSaver(VacanciesJSON):
 
 
 hh_api = HeadHunterAPI('python', 1, 1)
-hh_vacancies = hh_api.get_vacancies()
+# hh_vacancies = hh_api.get_vacancies()
 # print(hh_vacancies)
-# superjob_api = SuperJobAPI('python', 1, 100000)
+superjob_api = SuperJobAPI('python', 1, 100000)
 # superjob_vacancies = superjob_api.add_vacancy_sj()
 # print(superjob_vacancies)
-jsonsaver = JSONSaver()
-print(jsonsaver.add_vacancy_headhunter(hh_vacancies))
+# jsonsaver = JSONSaver()
+# print(jsonsaver.add_vacancy_headhunter(hh_vacancies))
 # print(jsonsaver.add_vacancy_superjob(superjob_vacancies))
+# print(hh_api >= superjob_api)
 
 

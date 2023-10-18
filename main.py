@@ -7,17 +7,14 @@ def user_interaction():
     name = input('Введите вакансию: ')
     top_n = input('Введите кол-во вакансий: ')
     page = int(input('Введите страницу: '))
-    hh_instance = HeadHunterAPI(name, page, top_n)
-    sj_instance = SuperJobAPI(name, page, top_n)
-    combined_dict = {'HH': hh_instance.add_vacancy_hh(), 'SJ': sj_instance.add_vacancy_sj()}
-
-    with open('vacancies.json', 'w', encoding='utf-8') as file:
-        json.dump(combined_dict, file, ensure_ascii=False, indent=2)
 
     platforma = input('введите платформу для поиска: (1 - HH, 2 - SJ, 3 - обе платформы)  ')
 
     if platforma == '3':
         while True:
+            hh_instance = HeadHunterAPI(name, page, top_n)
+            sj_instance = SuperJobAPI(name, page, top_n)
+            combined_dict = {'HH': hh_instance.add_vacancy_hh(), 'SJ': sj_instance.add_vacancy_sj()}
             hh_instance.page = page
             sj_instance.page = page
             hh_data = hh_instance.add_vacancy_hh()
@@ -42,6 +39,9 @@ def user_interaction():
                 break
     elif platforma == '1':
         while True:
+            hh_instance = HeadHunterAPI(name, page, top_n)
+            sj_instance = SuperJobAPI(name, page, top_n)
+            combined_dict = {'HH': hh_instance.add_vacancy_hh(), 'SJ': sj_instance.add_vacancy_sj()}
             hh_instance.page = page
             sj_instance.page = page
             hh_data = hh_instance.add_vacancy_hh()
@@ -62,6 +62,9 @@ def user_interaction():
 
     elif platforma == '2':
         while True:
+            hh_instance = HeadHunterAPI(name, page, top_n)
+            sj_instance = SuperJobAPI(name, page, top_n)
+            combined_dict = {'HH': hh_instance.add_vacancy_hh(), 'SJ': sj_instance.add_vacancy_sj()}
             hh_instance.page = page
             sj_instance.page = page
             hh_data = hh_instance.add_vacancy_hh()
@@ -84,3 +87,6 @@ def user_interaction():
                 break
 
 user_interaction()
+hh_api = HeadHunterAPI('python', 1, 1)
+superjob_api = SuperJobAPI('python', 1, 100000)
+print(hh_api >= superjob_api)
