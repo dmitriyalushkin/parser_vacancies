@@ -14,12 +14,12 @@ def user_interaction():
         while True:
             hh_instance = HeadHunterAPI(name, page, per_page)
             sj_instance = SuperJobAPI(name, page, per_page)
-            vacancies = {'HH': hh_instance.add_vacancy_hh(), 'SJ': sj_instance.add_vacancy_sj()}
+            vacancies = hh_instance.add_vacancy_hh() + sj_instance.add_vacancy_sj()
+            json_saver = JSONSaver()
+            json_saver.add_vacancies(vacancies, 'vacancies.json')
 
-            for platform, data in vacancies.items():
-                print(f"Платформа: {platform}")
-                for item in data:
-                    print(item)
+            for vacancy in vacancies:
+                print(vacancy)
 
             a = input('перейти на следующую страницу? y/n ')
             if a == 'y':

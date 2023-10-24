@@ -125,8 +125,8 @@ class JSONSaver(VacanciesJSON):
 
     def add_vacancy(self, vacancy, filename):
         with open(filename, 'w', encoding='utf-8') as file:
-            data = json.dump(vacancy.to_json(), file, indent=2, ensure_ascii=False)
-        return data
+            json.dump(vacancy.to_json(), file, indent=2, ensure_ascii=False)
+
 
 
 
